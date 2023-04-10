@@ -1,7 +1,5 @@
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.Container;
-import javax.swing.JPanel;
 import javax.swing.*;
 import java.io.*;
 import java.util.Scanner;
@@ -11,6 +9,7 @@ public class CSVToXMLConverter extends JFrame {
     private JTextField csvFilePathTextField;
     private JButton convertButton;
     private JTextArea outputTextArea;
+    private JPanel contentPane;
 
     public CSVToXMLConverter() {
         super("CSV to XML Converter");
@@ -30,6 +29,7 @@ public class CSVToXMLConverter extends JFrame {
                 try {
                     convertCSVToXML(csvFilePath);
                     outputTextArea.setText("The CSV file has been successfully converted to an XML file.");
+                    JOptionPane.showMessageDialog(null, "The XML file has been created successfully.");
                 } catch (IOException ex) {
                     outputTextArea.setText("An error occurred while converting the CSV file to an XML file.");
                 }
@@ -40,12 +40,12 @@ public class CSVToXMLConverter extends JFrame {
         outputTextArea = new JTextArea(10, 30);
         outputTextArea.setEditable(false);
 
-        // Add the components to the frame
-        JPanel contentPane = (JPanel) getContentPane();
-        contentPane.setLayout(new FlowLayout());
-        contentPane.add(csvFilePathTextField);
-        contentPane.add(convertButton);
-        contentPane.add(outputTextArea);
+        // Add the components to the panel
+        contentPane = (JPanel) getContentPane();
+        contentPane.setLayout(new BorderLayout());
+        contentPane.add(csvFilePathTextField, BorderLayout.NORTH);
+        contentPane.add(convertButton, BorderLayout.CENTER);
+        contentPane.add(outputTextArea, BorderLayout.SOUTH);
 
         // Set the frame's size and location
         setSize(400, 300);
